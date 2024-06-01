@@ -40,12 +40,13 @@ namespace API.Controller
             return Ok(users);
         }
 
-        [HttpGet("{username}", Name ="GetUser")]
-        public async Task<ActionResult<MemberDto>> GetUser(string username)
+        [HttpGet("{username}", Name = "GetUser")]
+        public async Task<ActionResult<MemberDto>> GetUsers(string username)
         {
-            return await _userRepository.GetMemberAsync(username); ;
+            return await _userRepository.GetMemberAsync(username);
 
         }
+
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
