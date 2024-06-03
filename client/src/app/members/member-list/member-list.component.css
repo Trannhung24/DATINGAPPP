@@ -1,0 +1,36 @@
+.form-inline .form-group {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .form-inline .form-group label {
+    margin-right: 5px;
+  }
+  
+  .form-inline .form-group input,
+  .form-inline .form-group select {
+    margin-left: 5px;
+  }
+  
+  .btn-info {
+    margin-left: 10px;
+  }
+  
+  .btn-group {
+    margin-left: 20px; /* Adjust the margin as needed */
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-group .btn {
+    margin-right: 5px; /* Add space between buttons */
+  }
+  
+  .row.d-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+  

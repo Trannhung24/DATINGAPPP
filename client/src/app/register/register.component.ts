@@ -58,11 +58,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-     this.accountService.register(this.registerForm.value).subscribe(response => {
-     this.router.navigateByUrl('/members');
-    }, error => {
-      this.validationErrors = error;
-     })
+    this.accountService.register(this.registerForm.value).subscribe({
+      next: response => {
+        this.router.navigateByUrl('/members');
+      },
+      error: error => {
+        this.validationErrors = error;
+      } 
+    })
   }
 
   cancel() {
