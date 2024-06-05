@@ -14,6 +14,7 @@ import { take } from 'rxjs/operators';
 })
 export class MemberListComponent implements OnInit {
   members: Member[] = [];
+  
   pagination: Pagination = {
     currentPage: 1,
     itemsPerPage: 5,
@@ -22,11 +23,13 @@ export class MemberListComponent implements OnInit {
   };
   userParams!: UserParams;
   user!: User;
-  genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
+  genderList = [
+    { value: 'male', display: 'Males' },
+    { value: 'female', display: 'Females' },
+  ];
   constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();
-    }
-  
+  }
 
   ngOnInit(): void {
     this.loadMembers();
@@ -34,18 +37,16 @@ export class MemberListComponent implements OnInit {
 
   loadMembers() {
     this.memberService.setUserParams(this.userParams);
-    this.memberService
-      .getMembers(this.userParams)
-      .subscribe((response) => {
-        if (response.result) {
-          this.members = response.result;
-        }
-        if (response.pagination) {
-          this.pagination = response.pagination;
-        }
-      });
+    this.memberService.getMembers(this.userParams).subscribe((response) => {
+      if (response.result) {
+        this.members = response.result;
+      }
+      if (response.pagination) {
+        this.pagination = response.pagination;
+      }
+    });
   }
-  resetFilters(){
+  resetFilters() {
     this.userParams = this.memberService.resetUserParams();
     this.loadMembers();
   }
