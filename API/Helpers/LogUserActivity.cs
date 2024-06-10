@@ -9,13 +9,12 @@ namespace API.Helpers
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var resultContext = await next();
-            var username = resultContext.HttpContext.User.GetUsername();
-            if(username == null) return;
-            var repo = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
-            if(repo == null) return;
-            var user = await repo.GetUserByUsernameAsync(username);
+            if(!resultContext.HttpContext.User.Identity.IsAuthenticated) return;
+            var userId = resultContext.HttpContext.User.GetUserId();
+            var uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
+            var user = await uow.UserRepository.GetUserByIdAsync(userId);
             user.LastActive = DateTime.UtcNow;
-            await repo.SaveAllAsync();
+            await uow.Complete();
         }
     }
 }
